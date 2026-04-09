@@ -1,0 +1,66 @@
+{
+  "info": {
+    "name": "School Management API",
+    "_postman_id": "school-mgmt-collection",
+    "description": "API collection for School Management System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Add School",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "{{base_url}}/addSchool", "host": ["{{base_url}}"], "path": ["addSchool"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Delhi Public School\",\n  \"address\": \"Sector 45, Noida, UP\",\n  \"latitude\": 28.5673,\n  \"longitude\": 77.3211\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "Success - 201",
+          "status": "Created",
+          "code": 201,
+          "body": "{\n  \"message\": \"School added successfully.\",\n  \"schoolId\": 1\n}"
+        },
+        {
+          "name": "Validation Error - 400",
+          "status": "Bad Request",
+          "code": 400,
+          "body": "{\n  \"error\": \"Invalid or missing 'name'.\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "List Schools (sorted by proximity)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/listSchools?latitude=25.5941&longitude=85.1376",
+          "host": ["{{base_url}}"],
+          "path": ["listSchools"],
+          "query": [
+            { "key": "latitude", "value": "25.5941", "description": "User latitude" },
+            { "key": "longitude", "value": "85.1376", "description": "User longitude" }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Success - 200",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"count\": 1,\n  \"schools\": [\n    {\n      \"id\": 1,\n      \"name\": \"Delhi Public School\",\n      \"address\": \"Sector 45, Noida, UP\",\n      \"latitude\": 28.5673,\n      \"longitude\": 77.3211,\n      \"distance_km\": 1043.25\n    }\n  ]\n}"
+        }
+      ]
+    }
+  ]
+}
