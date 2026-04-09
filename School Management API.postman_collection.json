@@ -1,0 +1,194 @@
+{
+  "info": {
+    "_postman_id": "12184490-be52-4d0b-9de1-5a668f668f44",
+    "name": "School Management API",
+    "description": "API collection for School Management System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53878438"
+  },
+  "item": [
+    {
+      "name": "Add School",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Delhi Public School\",\n  \"address\": \"Sector 45, Noida, UP\",\n  \"latitude\": 28.5673,\n  \"longitude\": 77.3211\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/addSchool",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "addSchool"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Success - 201",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Delhi Public School\",\n  \"address\": \"Sector 45, Noida, UP\",\n  \"latitude\": 28.5673,\n  \"longitude\": 77.3211\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/addSchool",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "addSchool"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "Text",
+          "header": [],
+          "cookie": [],
+          "body": "{\n  \"message\": \"School added successfully.\",\n  \"schoolId\": 1\n}"
+        },
+        {
+          "name": "Validation Error - 400",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Delhi Public School\",\n  \"address\": \"Sector 45, Noida, UP\",\n  \"latitude\": 28.5673,\n  \"longitude\": 77.3211\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/addSchool",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "addSchool"
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "Text",
+          "header": [],
+          "cookie": [],
+          "body": "{\n  \"error\": \"Invalid or missing 'name'.\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "List Schools (sorted by proximity)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/listSchools?latitude=25.5941&longitude=85.1376",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "listSchools"
+          ],
+          "query": [
+            {
+              "key": "latitude",
+              "value": "25.5941",
+              "description": "User latitude"
+            },
+            {
+              "key": "longitude",
+              "value": "85.1376",
+              "description": "User longitude"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Success - 200",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/listSchools?latitude=25.5941&longitude=85.1376",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "listSchools"
+              ],
+              "query": [
+                {
+                  "key": "latitude",
+                  "value": "25.5941",
+                  "description": "User latitude"
+                },
+                {
+                  "key": "longitude",
+                  "value": "85.1376",
+                  "description": "User longitude"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "Text",
+          "header": [],
+          "cookie": [],
+          "body": "{\n  \"count\": 1,\n  \"schools\": [\n    {\n      \"id\": 1,\n      \"name\": \"Delhi Public School\",\n      \"address\": \"Sector 45, Noida, UP\",\n      \"latitude\": 28.5673,\n      \"longitude\": 77.3211,\n      \"distance_km\": 1043.25\n    }\n  ]\n}"
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000"
+    }
+  ]
+}
